@@ -14,8 +14,12 @@ pipeline {
                 scripts {
                     def browsers = ['chrome', 'firefox']
                     for (int i = 0; i < browsers.size(); ++i) {
-                        echo "Running UI tests on ${params.ENVIRONMENT} and the ${browsers[i]} browser"
+                        echo "Running UI tests on ${params.ENVIRONMENT} environemnt and on ${browsers[i]} browser"
                     }
+                    // def browsers = ['chrome', 'firefox']
+                    // for (int i = 0; i < browsers.size(); ++i) {
+                    //     echo "Running UI tests on ${params.ENVIRONMENT} and the ${browsers[i]} browser"
+                    // }
                 }
             }
         }
