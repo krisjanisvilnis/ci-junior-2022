@@ -87,7 +87,7 @@ def test(String env){
                 keepAll: false, 
                 reportDir: '', 
                 reportFiles: "report_${env}.html", 
-                reportName: "Test report $(env)", 
+                reportName: "Test report ${env}", 
                 reportTitles: '', 
                 useWrapperFileDirectly: true
             ]
