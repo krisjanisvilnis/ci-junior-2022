@@ -12,7 +12,9 @@ pipeline {
         }
         stage('deploy-dev') {
             steps {
-                echo "Deploying on DEV"
+                script{
+                    deploy("DEV");
+                }
             }
         }
         stage('test-dev') {
@@ -22,7 +24,9 @@ pipeline {
         }
         stage('deploy-int') {
             steps {
-                echo "Deploying on INT"
+                script{
+                    deploy("INT");
+                }
             }
         }
         stage('test-int') {
@@ -32,7 +36,9 @@ pipeline {
         }
         stage('deploy-PROD}') {
             steps {
-                echo "Deploying on PROD"
+                script{
+                    deploy("PROD");
+                }
             }
         }
         stage('test-PROD') {
@@ -41,4 +47,9 @@ pipeline {
             }
         }
     }
+}
+
+def deploy(String env){
+    echo "Deploying on ${env} environment triggered"
+    build job: 'UI Testss', parameters: [string(name: "ENVIRONMENT", value"${env}")]
 }
