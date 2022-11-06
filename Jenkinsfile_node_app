@@ -56,7 +56,6 @@ pipeline {
     post {
         always {
             echo "Wowee, this will be always executed"
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/', reportFiles: 'report_DEV.html, report_INT.html, report_PROD.html', reportName: 'UI tests report', reportTitles: '', useWrapperFileDirectly: true])
         }
         success {
             echo "Wowee"
@@ -81,5 +80,17 @@ def test(String env){
     finally {
         sh "docker cp api_tests_executor_${env}://usr/src/api-tests/test-output/report.html report_${env}.html"
         sh "docker rm -f api_tests_executor_${env}"
+        publishHTML(
+            [
+                allowMissing: false, 
+                alwaysLinkToLastBuild: false, 
+                keepAll: false, 
+                reportDir: '', 
+                reportFiles: "report_${env}.html", 
+                reportName: "Test report $(env)", 
+                reportTitles: '', 
+                useWrapperFileDirectly: true
+            ]
+        )
     }
 }
